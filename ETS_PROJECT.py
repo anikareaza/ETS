@@ -83,37 +83,10 @@ def get_filename_stops(fName):
 
 def get_data(file_name="data/trips.txt"):
     '''
-    This expects a file name, ex. Trips.txt:
-       route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
-       1,1-Saturday-1-DEC16-0000010,12300994,"1",0,3271662,1-30-1
-       ...
-       113,113-Saturday-1-DEC16-0000010,12302515,"1",0,3271595,113-23-1
-       ...
-    and returns the file contents in a list of strings corresponding to each
-    line in the file, or None if the file doesn't exist.
+    This expects a file name and returns the file contents in a list 
+    of strings corresponding to each line in the file, or None 
+    if the file doesn't exist.
     
-    --------------------------------------------------------------
-    ['114,114-Weekday-1-DEC16-1111100,12294586,"1",0,3337925,114-8-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294587,"1",0,3338173,114-8-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294588,"1",0,3338293,114-8-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294589,"1",0,3338058,114-8-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294590,"1",0,3338324,114-8-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294591,"1",0,3338088,114-9-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294592,"1",0,3338095,114-9-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294593,"1",0,3337977,114-9-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294594,"1",0,3338238,114-9-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294595,"1",0,3337883,114-9-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294596,"1",0,3338238,114-9-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294597,"1",0,3337929,114-9-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294598,"1",0,3337830,114-8-1\n',
- '114,114-Weekday-1-DEC16-1111100,12294599,"1",0,3338082,114-9-1\n',
- '115,115-Saturday-1-DEC16-0000010,12303127,"1",0,3271517,115-6-1\n',
- '115,115-Saturday-1-DEC16-0000010,12303128,"1",0,3271517,115-7-1\n',
- '115,115-Saturday-1-DEC16-0000010,12303129,"1",0,3271517,115-6-1\n',
- '115,115-Saturday-1-DEC16-0000010,12303130,"1",0,3292619,115-6-1\n',
- '115,115-Saturday-1-DEC16-0000010,12303131,"1",0,3292619,115-4-1\n',
- '115,115-Saturday-1-DEC16-0000010,12303132,"1",0,3292619,115-6-1\n',
- '115,115-Sunday-1-DEC16-0000001,12287476,"1",0,3271390,115-6-1\n',
     '''
         
     try:
@@ -135,21 +108,12 @@ def get_data(file_name="data/trips.txt"):
 
 def get_shapes_coords(file_name = "data/shapes.txt"):
     '''
-    This expects a file name, ex. Shapes.txt:
-       shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence
-       1-30-1,53.53864,-113.42325,1
-       ...
-       113-22-1,53.51991,-113.62076,78
-       ...
+    This expects a file name,
+    shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence
     loads the file contents, skips the first line, and returns a dictionary of
     <key, value> pairs, with key = value before the first comma, and value = 
-    a list of 2-tuples consisting of two float values after the first comma; ex:
-       { '1-30-1' : [ (53.53864, -113.42325), 
-                      (53.53863, -113.42329) ... (53.5206, -113.62288) ]
-         ...
-         '113-22-1' : [ (53.52029, -113.62225), 
-                        (53.52024, -113.62194), ... (53.52029, -113.62225) ]
-         ... }
+    a list of 2-tuples consisting of two float values after the first comma.
+      
     '''
 
     try:
@@ -175,9 +139,8 @@ def create_routes_dict(data):
     line in the file, It skips the first line, and returns a dictionary of
     <key, value> pairs, with key = value before the first comma, and a 
     list a list of strings consisting of the unique element after the 6th comma
-    from every line starting with the same key; ex.:
-      { '1'  : ["1-30-1", "1-32-1"," 1-31-1"...]
-        '113': [113-22-1, 113-24-1, 113-23-1' ... ]
+    from every line starting with the same key.
+      
     '''
     routes = {}   # to be returned: routes dict shown above
     
@@ -291,7 +254,7 @@ def save_in_pickle(fname_pickle , shapeIDs, shapes, stops):
     then dumps the info in both dicts in a new created file. Then returns that
     file
     '''
-    #pprint.pprint(fname_pickle)
+   
     
     shapes_n_shapeIDs = (shapeIDs, shapes, stops)
     
@@ -309,7 +272,7 @@ def save_in_pickle(fname_pickle , shapeIDs, shapes, stops):
   
     
       
-    #load_from_pickle(fPkle)
+  
     
     
     
@@ -357,7 +320,7 @@ def Edmonton_GUI(from_pkle):
     """
     
     shape_ids , shapes, stops = from_pkle
-    #print(stops)
+  
     
     win = GraphWin("Edmonton Transit System", 630, 768)
     YEG_image = Image(Point(0,0), "Background.gif")
@@ -377,7 +340,7 @@ def Edmonton_GUI(from_pkle):
     inputBox.setFill("white")
     inputBox.draw(win)
     
-    # setCoords(xll, yll, xur, yur)
+ 
     win.setCoords(-113.7136, 53.39576, -113.2714, 53.71605)
     
     
@@ -430,39 +393,11 @@ def plot_route(win, shape_ids, shapes, route, t):
     """
     This plots the specified route, by joining all coordinates in shapes dict,
     using the longest shape in the shape_ids dict.
-    
-    shape_ids---------------
-    This expects a dictionary structured as follows:
-     {'98': ['98-5-1', '98-6-1'],
-      '99': ['99-26-1', '99-25-1', '99-8-1', '99-21-1']}
-    prompts user for for a route no., ex. 98, and then displays something like:
-       ShapeIDs for 98:
-	  98-5-1
-          98-6-1
-    returns : None
-    
-    shapes-----------------
-    This expects a dictionary structured as follows:
-     {'1-30-1': [(53.53864, -113.42325)
-          (53.53863, -113.42329)
-          (53.5386, -113.42332)],
-      '109-32-1': [(53.5405, -113.59207),
-              (53.5406, -113.59207),
-              (53.54069, -113.59206)]}
-    prompts user for for a route no., ex. 98, and then displays something like:
-         Shapes for 1-30-1:
-	  (53.53864, -113.42325)
-          (53.53863, -113.42329)
-          (53.5386, -113.42332)
-          (53.53856, -113.42333)
-          (53.53838, -113.42333)
-          (53.53831, -113.42325)
     returns : None
     
     """  
     
     longest_shape_id = {}
-    #pprint.pprint(shapes)       dev check
     
     
     if route not in shape_ids:
@@ -496,19 +431,11 @@ def plot_route(win, shape_ids, shapes, route, t):
 
 def load_stops(fName="data/Stops.txt"):
     '''
-    This reads bus stop information from file fName, where each line is like:
-       "1001,1001,"Abbottsfield Transit Centre",,  53.571965,-113.390362,,,0,"
-        0   1    2                             34           5           678 9
-         ID        name                           longitude   latitude
+    This reads bus stop information from file fName
     and returns a dictionary with bus stop (lat, long) as keys, and a list of
-    (bus stop ID, bus stop name) tuples for each; ex.:
-    {  (53.571965, -113.390362) :  [ ('1001', 'Abbottsfield Transit Centre') ]
-            :           :               :                  :                   }
-    NOTE: examination of the resulting dictionary and source text file seems to
-    indicate that there is a one to one relationship between the dictionary keys
-    and bus stops in the text file, suggesting that there is no need for a list
-    of bus stop info for each key.
+    (bus stop ID, bus stop name) tuples for each.
     '''
+
     try:
         print("opening file...", end = "")
         fIn = open(fName)
@@ -566,14 +493,10 @@ def closest_stops(lat, long, stops, num=5):
     then sorted by distance, and returns a list of the first num; ex.: 
        closest_stops(53.57196, -113.3903, stops)
     returns a list of (num) lists [ distance, stop_id, stop_name, lat, long ]: 
-     [ [  4.1, '1001', 'Abbottsfield Transit Centre', 53.571965, -113.390362], 
-       [ 21.3, '1002', 'Abbottsfield Transit Centre', 53.572087, -113.390058], 
-       ...
-       [192.3, '1612', '34 Street & 119 Avenue', 53.57185, -113.393205]  ]
     '''
+
     distances = []
-    #print(type(lat) , type(long))
-    #haversine(53.571965, -113.390362, 53.572087, -113.390058)
+    
     for loc, info in stops.items():
         dist = haversine(lat, long, loc[0], loc[1])
         stop_name = info[0][1].strip('""')
@@ -583,13 +506,7 @@ def closest_stops(lat, long, stops, num=5):
 
 def plot_stops(win, stops):
     '''
-    This expects GraphWin, and a list of bus stops, ex.:
-      distance, stop_ID,  name                        , latitude , longitude 
-           [0]      [1]   [2]                           [3]        [4]
-    [[     4.1,  '1001', 'Abbottsfield Transit Centre', 53.571965, -113.390362], 
-     [    21.3,  '1002', 'Abbottsfield Transit Centre', 53.572087, -113.390058], 
-        ...
-     [   192.3,  '1612', '34 Street & 119 Avenue', 53.57185, -113.393205]  ]
+    This expects GraphWin, and a list of bus stops
     and plots a Point at each one.
     '''
     for i in range(5):
@@ -598,13 +515,9 @@ def plot_stops(win, stops):
 
 def print_stops(stops_dict):
     """
-    Given a dictionary of bus stops, ex.
-    { (53.571965, -113.390362) : [('1001', 'Abbottsfield Transit Centre')] ... }
+    Given a dictionary of bus stops
     this prompts the user for a lat and lon and then prints the stopID and 
     description for that corresponding lon and lat.
-    ex:
-    Stops for (53.575137, -113.403388): ======== (53.519677, -113.609511)
-                                       1065 40 Street & 121 Avenue
     """
     
     usr_loc = input("Location as 'lat, lon'?: ")
@@ -623,24 +536,10 @@ def print_stops(stops_dict):
 
 def print_closest_stops(stops):
     '''
-    This expects list of the nearest bus stops, ex.:
-      distance, stop_ID,  name                        , latitude , longitude 
-           [0]      [1]   [2]                           [3]        [4]
-    [[     4.1,  '1001', 'Abbottsfield Transit Centre', 53.571965, -113.390362], 
-     [    21.3,  '1002', 'Abbottsfield Transit Centre', 53.572087, -113.390058], 
-        ...
-     [   192.3,  '1612', '34 Street & 119 Avenue', 53.57185, -113.393205]  ]
+    This expects list of the nearest bus stops
     and for each prints out the distance, bus stop id, and name.
-    -------------------------------
-    ex:
-    Nearest stops:
-                Distance    Stop     Description
-                  987.5     7602     Korea Road & Vimy Avenue Garrison
-                 1064.8     7971     Rhine Road & Sapper Way Garrison
-                 1071.1     7417     Rhine Road & Ubique Avenue Garrison
-                 1105.3     7403     Korea Road & Melfa Crossing Garrison
-                 1163.7     7404     Rhine Road & Vimy Avenue Garrison
     '''
+
     five_stops = stops[0]
     print(f"""Nearest stops:
       Distance  Stop    Description""")
