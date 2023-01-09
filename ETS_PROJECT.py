@@ -1,5 +1,5 @@
 import pprint
-from graphics420 import *
+from graphics import *
 import pickle
 import sys
 
